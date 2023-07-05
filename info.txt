@@ -1,0 +1,49 @@
+https://evanesce.com/
+https://www.pactiv.com/
+https://www.ecoproducts.com/
+https://www.worldcentric.com/
+
+
+
+first view full page photo
+prduct types slider 5 at time
+data information about our prduct 
+Company details
+featured products slider
+custome printing 
+testimonials
+CTA get a qoute
+footer
+
+
+
+Biocare
+
+menu items
+company products blogs carrers contact-us
+
+cambridge, massachusetts, USA 02140
+125 Cambridgepark Drive, Suite 301, Cambridge, MA. 02140
+
+
+XX Form items (contact Us) first name, last name, email, phone number, message
+XX header and menu white bg 
+XX fotter bg green
+XX logo e white (mail vado) in footer
+XX first view of home page ma slider (niche small bars denoting images of the slides) no buttons
+XX product types view ma at a time 5 images and button side ma 
+XX product ma sider 5 at a time and side ma buttons
+XX testimonial ma buttons side ma
+transiton (new page load) navbar logo white and bg green
+
+
+
+
+XX top bar color change green hover on text vado / remove address and email
+XX menu ma home kadhi ne last ma sign in 
+register pehla verification with mail (authentication link)
+post ma comment phela sign required
+register form first and last name, email, password, confirm password
+
+
+compostable, biodegradable sugarcane bagasse food packaging
