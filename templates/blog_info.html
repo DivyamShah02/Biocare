@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>{{blog_data.title}}</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="{% for tag in blog_tags %}{% if forloop.counter == 1 %}{% else %}, {% endif %}{{tag}}{% endfor %}" name="keywords">
+    <meta content="{{blog_data.para_1}}" name="description">
+    <!-- Favicon -->
+    <link href="/static/img/favicon.png" rel="icon">
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500&family=Lora:wght@600;700&display=swap" rel="stylesheet"> 
+
+    <!-- Icon Font Stylesheet -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- Libraries Stylesheet -->
+    <link href="/static/ext_lib/animate/animate.min.css" rel="stylesheet">
+    <link href="/static/ext_lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="/static/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Template Stylesheet -->
+    <link href="/static/css/blog.css" rel="stylesheet">
+    <link href="/static/css/style.css" rel="stylesheet">
+    <style>
+      .me-4 {
+  margin-right: 1.5rem !important; }
+  @media (max-width:990px){
+    .container{
+      padding-top: 80px !important;
+    }
+  }
+    </style>
+</head>
+
+<body>
+
+    {% include "header.html" %}
+
+    <section class="section">
+      <div class="container" style="padding-top: 150px;">
+  
+        <div class="row blog-entries element-animate">
+  
+          <div class="col-md-12 col-lg-8 main-content">
+  
+            <div class="post-content-body">
+              <h2>{{blog_data.title}}</h2>
+              <p>{{blog_data.para_1}}</p>
+              <div class="row my-4">
+                <div class="col-md-12 mb-4">
+                  <img src="{{blog_data.head_image.url}}" alt="Image placeholder" class="img-fluid rounded-top">
+                </div>
+                <div class="col-md-6 mb-4">
+                  <img src="{{blog_data.secondary_image_1.url}}" alt="Image placeholder" class="img-fluid rounded">
+                </div>
+                <div class="col-md-6 mb-4">
+                  <img src="{{blog_data.secondary_image_2.url}}" alt="Image placeholder" class="img-fluid rounded">
+                </div>
+              </div>
+              <p>{{blog_data.para_2}}</p>            
+              </div>
+  
+  
+            <div class="pt-5">
+              <p>Category: Food | Tags: {% for tag in blog_tags %}{% if forloop.counter == 1 %}{% else %},{% endif %} #{{tag}}{% endfor %}
+            </div>
+  
+  
+            <div class="pt-5 comment-wrap">
+              <h3 class="mb-5 heading">1 Comment</h3>
+              <ul class="comment-list">
+                <li class="comment">
+                  <div class="vcard">
+                    <img src="/static/images/person_1.jpg" alt="Image placeholder">
+                  </div>
+                  <div class="comment-body">
+                    <h3>Divyam Shah</h3>
+                    <div class="meta">June 28, 2023 at 2:21pm</div>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur quidem laborum necessitatibus, ipsam impedit vitae autem, eum officia, fugiat saepe enim sapiente iste iure! Quam voluptas earum impedit necessitatibus, nihil?</p>
+                    <p><a href="#" class="reply rounded">Reply</a></p>
+                  </div>
+                </li>
+  
+                
+              </ul>
+              <!-- END comment-list -->
+  
+              <div class="comment-form-wrap pt-5">
+                <h3 class="mb-5">Leave a comment</h3>
+                <form action="#" class="p-5 bg-light">
+                  <div class="form-group">
+                    <label for="name">Name *</label>
+                    <input type="text" class="form-control" id="name">
+                  </div>
+                  <div class="form-group">
+                    <label for="email">Email *</label>
+                    <input type="email" class="form-control" id="email">
+                  </div>
+                  <!-- <div class="form-group">
+                    <label for="website">Website</label>
+                    <input type="url" class="form-control" id="website">
+                  </div> -->
+  
+                  <div class="form-group">
+                    <label for="message">Message</label>
+                    <textarea name="" id="message" cols="30" rows="10" class="form-control"></textarea>
+                  </div>
+                  <div class="form-group">
+                    <input type="submit" value="Post Comment" class="btn btn-primary">
+                  </div>
+  
+                </form>
+              </div>
+            </div>
+  
+          </div>
+  
+          <!-- END main-content -->
+  
+          <div class="col-md-12 col-lg-4 sidebar">          
+            <div class="sidebar-box">
+              <h3 class="heading">Latest Posts</h3>
+              <div class="post-entry-sidebar">
+                <ul>
+                  {% for latest_blog in latest_blog_data %}                                    
+                  <li>
+                    <a href="{% url 'blog_info' latest_blog.slug %}">
+                      <img src="{{latest_blog.secondary_image_2.url}}" alt="Image placeholder" class="me-4 rounded">
+                      <div class="text">
+                        <h4>{{latest_blog.title}}</h4>
+                        <div class="post-meta">
+                          <span class="mr-2">{{latest_blog.date}}</span>
+                        </div>
+                      </div>
+                    </a>
+                  </li>
+                  {% endfor %}                  
+                </ul>
+              </div>
+            </div>
+            <!-- END sidebar-box -->
+  
+            <!-- <div class="sidebar-box">
+              <h3 class="heading">Categories</h3>
+              <ul class="categories">
+                <li><a href="#">Food <span>(12)</span></a></li>
+                <li><a href="#">Travel <span>(22)</span></a></li>
+                <li><a href="#">Lifestyle <span>(37)</span></a></li>
+                <li><a href="#">Business <span>(42)</span></a></li>
+                <li><a href="#">Adventure <span>(14)</span></a></li>
+              </ul>
+            </div> -->
+            <!-- END sidebar-box -->
+  
+            <div class="sidebar-box">
+              <h3 class="heading">Tags</h3>
+              <ul class="tags">
+                {% for tag in blog_tags %}                
+                <li><a href="#">{{tag}}</a></li>
+                {% endfor %}
+              </ul>
+            </div>
+          </div>
+          <!-- END sidebar -->
+  
+        </div>
+      </div>
+    </section>
+  
+  
+    <!-- Start posts-entry -->
+    <section class="section posts-entry posts-entry-sm bg-light">
+      <div class="container">
+        <div class="row mb-4">
+          <div class="col-12 text-uppercase text-black">More Blog Posts</div>
+        </div>
+        <div class="row">
+          {% for similar_blog in similar_blog_data %}
+          
+          <div class="col-md-6 col-lg-3">
+            <div class="blog-entry">
+              <a href="{% url 'blog_info' similar_blog.slug %}" class="img-link">
+                <img src="{{similar_blog.secondary_image_1.url}}" alt="Image" class="img-fluid">
+              </a>
+              <span class="date">{{similar_blog.date}}</span>
+              <h2><a href="{% url 'blog_info' similar_blog.slug %}">{{similar_blog.title}}</a></h2>
+              <!-- <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+              <p><a href="#" class="read-more">Continue Reading</a></p> -->
+            </div>
+          </div>
+
+          {% endfor %}
+        </div>
+      </div>
+    </section>
+    <!-- End posts-entry -->
+
+    {% include "footer.html" %}
+
+ 
+
+    <!-- Back to Top -->
+    <a href="#" class="btn btn-lg btn-primary btn-lg-square rounded-circle back-to-top"><i class="bi bi-arrow-up"></i></a>
+
+
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/static/ext_lib/wow/wow.min.js"></script>
+    <script src="/static/ext_lib/easing/easing.min.js"></script>
+    <script src="/static/ext_lib/waypoints/waypoints.min.js"></script>
+    <script src="/static/ext_lib/owlcarousel/owl.carousel.min.js"></script>
+
+    <!-- Template Javascript -->
+    <script src="/static/js/main.js"></script>
+</body>
+
+</html>

@@ -22,10 +22,13 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-7=2$91f-%)wc%j!0=)nsa#9!3cu(&vredckwsv9)bglh%%rj1@'
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+with open('Biocare/key.txt') as f:
+    SECRET_KEY = f.read().strip()
 
-ALLOWED_HOSTS = []
+# SECURITY WARNING: don't run with debug turned on in production!
+DEBUG = False
+
+ALLOWED_HOSTS = ['https://www.biocareworld.com/']
 
 
 # Application definition
@@ -37,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'biocare_data',
 ]
 
 MIDDLEWARE = [

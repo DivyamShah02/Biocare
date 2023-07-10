@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Add</title>
+    <style>
+        body{
+            padding: 3px 10px;
+        }
+        label{
+            font-size:x-large;
+            padding: 0 5px;            
+        }    
+        textarea{
+            margin: 0 5px;
+        }      
+        input{
+            padding: 7px 3px 5px 3px;     
+            margin: 0 5px;       
+        }
+        button{
+            margin-bottom: 30px;
+            padding: 15px 20px;
+            font-size: large;
+            background-color: green;
+            color: #fff;
+            border-radius: 20px;
+            border: black solid 2px;
+            box-shadow: 2px 2px 12px black;
+            cursor: pointer;
+        }
+        button:hover{
+            background-color: #fff;
+            box-shadow: 4px 4px 20px black;
+            color: green;
+            border: black solid 3px;
+
+
+        }
+    </style>
+</head>
+<body>
+    <h1>Product Adder</h1>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <label for="title">Title:</label>
+        <input type="text" id="title" name="title" placeholder="Enter Title" size="80" required autofocus>
+        <br><br>
+       <!-- <label for="slug">Slug:</label>
+        <input type="text" id="slug" name="slug" placeholder="Enter Slug" size="80" required>
+        <br><br> -->
+        <label for="category">Category:</label>
+        <input type="text" id="category" name="category" placeholder="Enter Category" size="50" required>
+        <br><br>
+        <label for="price">Price:</label>
+        <input type="number" id="price" name="price" placeholder="Enter Price" size="50" required>
+        <br><br>
+        <label for="info">Info:</label><br><br>
+        <textarea type="text" id="info" name="info" placeholder="Enter Info" rows="10" cols="83" required></textarea>
+        <br><br>
+        <label for="shop_link">Shop Link:</label>
+        <input type="text" id="shop_link" name="shop_link" placeholder="https://www.biocareworld.com/" size="50" required>
+        <small>Include <b><u>https://</u></b></small>
+        <br><br>
+        <label for="image">Image:</label><small><u>800px X 800px</u></small>
+        <input type="file" id="image" name="image" accept="image/png, image/jpeg" required/>
+        <br><br>
+        <label for="pt1_head">Point 1 head:</label>
+        <input type="text" id="pt1_head" name="pt1_head" placeholder="Point 1 head" required>
+        <label for="pt1_value">Point 1 value:</label>
+        <input type="text" id="pt1_value" name="pt1_value" placeholder="Point 1 value">
+        <br><br>
+        <label for="pt2_head">Point 2 head:</label>
+        <input type="text" id="pt2_head" name="pt2_head" placeholder="Point 2 head">
+        <label for="pt2_value">Point 2 value:</label>
+        <input type="text" id="pt2_value" name="pt2_value" placeholder="Point 2 value">
+        <br><br>
+        <label for="pt2_head">Point 2 head:</label>
+        <input type="text" id="pt3_head" name="pt3_head" placeholder="Point 3 head">
+        <label for="pt3_value">Point 3 value:</label>
+        <input type="text" id="pt3_value" name="pt3_value" placeholder="Point 3 value">
+        <br><br>
+        <label for="pt4_head">Point 4 head:</label>
+        <input type="text" id="pt4_head" name="pt4_head" placeholder="Point 4 head">
+        <label for="pt4_value">Point 4 value:</label>
+        <input type="text" id="pt4_value" name="pt4_value" placeholder="Point 4 value">
+        <br><br>
+        <label for="pt5_head">Point 5 head:</label>
+        <input type="text" id="pt5_head" name="pt5_head" placeholder="Point 5 head">
+        <label for="pt5_value">Point 5 value:</label>
+        <input type="text" id="pt5_value" name="pt5_value" placeholder="Point 5 value">
+        <br><br>
+        <label for="pt6_head">Point 6 head:</label>
+        <input type="text" id="pt6_head" name="pt6_head" placeholder="Point 6 head">
+        <label for="pt6_value">Point 6 value:</label>
+        <input type="text" id="pt6_value" name="pt6_value" placeholder="Point 6 value">
+        <br><br>
+        <label for="pt7_head">Point 7 head:</label>
+        <input type="text" id="pt7_head" name="pt7_head" placeholder="Point 7 head">
+        <label for="pt7_value">Point 7 value:</label>
+        <input type="text" id="pt7_value" name="pt7_value" placeholder="Point 7 value">
+        <br><br>
+        <label for="pt8_head">Point 8 head:</label>
+        <input type="text" id="pt8_head" name="pt8_head" placeholder="Point 8 head">
+        <label for="pt8_value">Point 8 value:</label>
+        <input type="text" id="pt8_value" name="pt8_value" placeholder="Point 8 value">
+        <br><br>
+        <label for="pt9_head">Point 9 head:</label>
+        <input type="text" id="pt9_head" name="pt9_head" placeholder="Point 9 head">
+        <label for="pt9_value">Point 9 value:</label>
+        <input type="text" id="pt9_value" name="pt9_value" placeholder="Point 9 value">
+        <br><br>
+        <label for="pt10_head">Point 10 head:</label>
+        <input type="text" id="pt10_head" name="pt10_head" placeholder="Point 10 head">
+        <label for="pt10_value">Point 10 value:</label>
+        <input type="text" id="pt10_value" name="pt10_value" placeholder="Point 10 value">
+        <br><br>
+        <button type="submit">Add Product</button>
+
+    </form>
+</body>
+</html>

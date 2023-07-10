@@ -38,7 +38,11 @@
                     <a href="{% url 'blogs' %}" class="nav-item nav-link">Blogs</a>
                     <a href="#" class="nav-item nav-link">Careers</a>                    
                     <a href="{% url 'contact_us' %}" class="nav-item nav-link">Contact Us</a>
+                    {% if is_logged_in == True %}
+                    <a href="{% url 'log_out' %}" class="nav-item nav-link">Log Out</a>   
+                    {% else %}                 
                     <a href="{% url 'sign_in' %}" class="nav-item nav-link">Sign In</a>
+                    {% endif %}
                     <!-- <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
                         <div class="dropdown-menu m-0">

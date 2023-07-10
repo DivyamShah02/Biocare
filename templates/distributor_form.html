@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>Distributor Form</title>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <meta content="" name="keywords">
+  <meta content="Embracing Nature in Every Package. We believe compostable and bio-degradable is the future to a sustainable living. We are committed to deliver eco-friendly and sustainable food packaging." name="description">
+
+  <!-- Favicon -->
+  <link href="/static/img/favicon.png" rel="icon">
+
+  <!-- Google Web Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500&family=Lora:wght@600;700&display=swap" rel="stylesheet"> 
+
+  <!-- Icon Font Stylesheet -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
+  <!-- Libraries Stylesheet -->
+  <link href="/static/ext_lib/animate/animate.min.css" rel="stylesheet">
+  <link href="/static/ext_lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+
+  <!-- Customized Bootstrap Stylesheet -->
+  <link href="/static/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Template Stylesheet -->
+  <link href="/static/css/style.css" rel="stylesheet">
+  <style>	
+    input,textarea{
+            border: var(--primary) 1px solid !important;
+        }
+    </style>
+</head>
+
+<body>
+    {% include "header.html" %}
+
+    <!-- Product Start -->
+    <div class="container-xxl py-5">        
+    <section class="">
+
+    <div class="py-5 pt-lg-5 mt-lg-5">
+      <div class="container">
+        <div class="row gx-lg-5 align-items-center">            
+          <div class="col-lg-12 mb-5 mb-lg-0">
+
+            {% if error == 1 %}
+              <div class="alert alert-danger" role="alert" style="border-radius: 10px;">
+                <b>You are not logged in!<br>
+                  First <a href="{% url 'sign_in' %}"><u>Log In</u></a> / <a href="{% url 'register' %}"><u>Register</u></a> to create a distributor profile.</b>
+              </div>
+            {% endif %}
+
+            {% if error == 2 %}
+            <div class="alert alert-warning" role="alert" style="border-radius: 10px;">
+              <b>Your account is not activated yet!<br>
+                Check you mail box for avtivation link.</b>
+            </div>
+            {% endif %}
+
+            {% if error == 3 %}
+            <div class="alert alert-success" role="alert" style="border-radius: 10px;">
+              <b>You are already a distributor!</b>
+            </div>
+            {% endif %}
+
+            {% if error == 4 %}
+            <div class="alert alert-success" role="alert" style="border-radius: 10px;">
+              <b>Your account is already created!<br>
+                Wait while we activate your distributor profile. We will mail you once our team activate your profile.</b>
+            </div>
+            {% endif %}
+
+            {% if error == 5 %}
+            <div class="alert alert-success" role="alert" style="border-radius: 10px;">
+              <b>Your account is successfully created!<br>
+              Wait while we activate your distributor profile. We will mail you once our team activate your profile.</b>
+            </div>
+            {% endif %}
+
+
+            {% if is_logged_in == True %}
+            {% else %}
+            <div class="alert alert-warning" role="alert" style="border-radius: 10px;">
+              <b>You are not logged in!<br>
+                First <a href="{% url 'sign_in' %}"><u>Log In</u></a> / <a href="{% url 'register' %}"><u>Register</u></a> to create a distributor profile.</b>
+            </div>
+            {% endif %}
+            
+            <div class="text-center mb-3">
+                <h2>Become Distributor at Biocare World</h2>
+            </div>
+            <div class="card" style="border: var(--primary) 2px solid; border-radius: 10px;">
+              <div class="card-body pt-5 px-md-5">
+                <form method="post">
+                    {% csrf_token %}
+                  <!-- 2 column grid layout with text inputs for the first and last names -->
+                  <div class="row">
+                    <div class="col-md-6 mb-4">
+                      <div class="form-outline">
+                          <label class="form-label" for="first_name">First name</label>
+                        <input type="text" id="first_name" name="first_name" value="{{user.first_name}}" class="form-control" required autofocus/>
+                      </div>
+                    </div>
+                    <div class="col-md-6 mb-4">
+                      <div class="form-outline">
+                          <label class="form-label" for="last_name">Last name</label>
+                        <input type="text" id="last_name" name="last_name" value="{{user.last_name}}" class="form-control" required/>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Email input -->
+                  <div class="form-outline mb-4">
+                    <label class="form-label" for="email">Your Email Id</label>
+                    <input type="email" id="email" name="email" value="{{user.email}}" class="form-control" required/>
+                  </div>
+
+                  <!-- number input -->
+                  <div class="form-outline mb-4">
+                    <label class="form-label" for="number">Your Mobile Number</label>
+                    <input type="number" min="1" id="number" name="number" class="form-control" required/>
+                  </div>
+
+                  <!-- Password input -->
+                  <!-- <div class="form-outline mb-4">
+                    <label class="form-label" for="password">Password</label>
+                  <input type="password" id="password" name="password" class="form-control" required/>
+                  </div> -->
+
+                  <!-- company input -->
+                  <!-- <div class="form-outline mb-4">
+                    <label class="form-label" for="company">Company Name</label>
+                  <input type="text" id="company" name="company" class="form-control" required/>
+                  </div> -->
+
+                  <!-- address input -->
+                  <div class="form-outline mb-4">
+                    <label class="form-label" for="address">Your Address</label>
+                  <textarea id="address" name="address" class="form-control" required rows="4"></textarea>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-md-6 mb-4">
+                      <!-- state input -->
+                      <div class="form-outline">
+                        <label class="form-label" for="state">State</label>
+                      <input type="text" id="state" name="state" class="form-control" required/>
+                      </div>
+                    </div>
+                    <div class="col-md-6 mb-4">
+                      <!-- country input -->
+                      <div class="form-outline">
+                        <label class="form-label" for="country">Country</label>
+                      <input type="text" id="country" name="country" class="form-control" required/>
+                      </div>
+                    </div>
+
+                  </div>                  
+                  
+                  <h2>Delivery Information</h2>
+                  <!-- <div class="row">
+                    <div class="col-md-6 mb-4">
+                      <div class="form-outline">
+                          <label class="form-label" for="first_name">First name</label>
+                        <input type="text" id="first_name" name="first_name" class="form-control" required autofocus/>
+                      </div>
+                    </div>
+                    <div class="col-md-6 mb-4">
+                      <div class="form-outline">
+                          <label class="form-label" for="last_name">Last name</label>
+                        <input type="text" id="last_name" name="last_name" class="form-control" required/>
+                      </div>
+                    </div>
+                  </div> -->
+
+                  <!-- Email input -->
+                  <div class="form-outline mb-4">
+                    <label class="form-label" for="co_email">Company Email Id</label>
+                    <input type="email" id="co_email" name="co_email" class="form-control" required/>
+                  </div>
+
+
+                  <!-- company input -->
+                  <div class="form-outline mb-4">
+                    <label class="form-label" for="company">Company Name</label>
+                  <input type="text" id="company" name="company" class="form-control" required/>
+                  </div>
+
+                  <!-- address input -->
+                  <div class="form-outline mb-4">
+                    <label class="form-label" for="co_address">Delivery Address</label>
+                  <textarea id="co_address" name="co_address" class="form-control" required rows="4"></textarea>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-md-6 mb-4">
+                      <!-- state input -->
+                      <div class="form-outline">
+                        <label class="form-label" for="co_state">State</label>
+                      <input type="text" id="co_state" name="co_state" class="form-control" required/>
+                      </div>
+                    </div>
+                    <div class="col-md-6 mb-4">
+                      <!-- country input -->
+                      <div class="form-outline">
+                        <label class="form-label" for="co_country">Country</label>
+                      <input type="text" id="co_country" name="co_country" class="form-control" required/>
+                      </div>
+                    </div>
+
+                  </div>     
+  
+
+  
+                  <!-- Checkbox -->
+                  <div class="form-check mb-4">
+                    <input class="form-check-input me-2" type="checkbox" value="" id="privacy" required/>
+                    <label class="form-check-label" for="privacy">I agree with Biocare World <a href="#"><u>Privacy Policy</u></a> and <a href="#"><u>Terms & Conditions</u></a>
+                    </label>
+                  </div>
+  
+                  <!-- Submit button -->
+                  <button type="submit" class="btn btn-primary btn-block mb-4 px-5" style="border-radius: 20px;">
+                    Sign up
+                  </button>                
+                </form>
+              </div>
+              <div class="card-footer text-center">
+                <p>Already have an account? <a href="{% url 'sign_in' %}"><u>Sign In</u></a></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </section>
+    </div>
+        
+
+    {% include "footer.html" %}
+ 
+
+    <!-- Back to Top -->
+    <a href="#" class="btn btn-lg btn-primary btn-lg-square rounded-circle back-to-top"><i class="bi bi-arrow-up"></i></a>
+
+
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/static/ext_lib/wow/wow.min.js"></script>
+    <script src="/static/ext_lib/easing/easing.min.js"></script>
+    <script src="/static/ext_lib/waypoints/waypoints.min.js"></script>
+    <script src="/static/ext_lib/owlcarousel/owl.carousel.min.js"></script>
+
+    <!-- Template Javascript -->
+    <script src="/static/js/main.js"></script>
+</body>
+
+</html>

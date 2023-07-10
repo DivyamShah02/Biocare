@@ -47,3 +47,21 @@ register form first and last name, email, password, confirm password
 
 
 compostable, biodegradable sugarcane bagasse food packaging
+
+
+
+
+Site header
+Embracing Nature in Every Package
+
+Second slide
+We believe compostable and bio-degradable is the future to a sustainable living.
+We are committed to deliver eco-friendly and sustainable food packaging.
+
+
+OR 
+Line does not moves just the bg image slides 
+
+
+distributor form
+email,PASSWORD,mobile,fn,ln,company name,address(country,state),delivery details(first name, last name,company name,email,address,phone)
