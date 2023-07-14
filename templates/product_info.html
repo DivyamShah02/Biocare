@@ -29,6 +29,12 @@
 
   <!-- Template Stylesheet -->
   <link href="/static/css/style.css" rel="stylesheet">
+  <style>
+    .btn-outline-primary:active{
+      color: white;
+      border: 1px solid var(--primary);
+    }
+  </style>
 </head>
 
 <body>
@@ -89,8 +95,14 @@
                 </div>
       
                 <div class="mb-3">
-                  <span class="h5">${{product_data.price}}</span>
-                  <span class="text-muted">/per piece</span>
+                  <span class="h5" id="price">$ {{product_data.price_1}}</span>
+                  <!-- <span class="text-muted">/per piece</span> -->
+                </div>
+                <div class="mb-3">
+                  <span class="text-muted"><b>Quantity:&nbsp;</b></span>
+                  <button class="btn btn-outline-primary p-1 py-0" autofocus onclick="document.getElementById('price').innerHTML = '$ {{product_data.price_1}}'">{{product_data.price_qty_1}}</button>&nbsp;
+                  <button class="btn btn-outline-primary p-1 py-0" onclick="document.getElementById('price').innerHTML = '$ {{product_data.price_2}}'">{{product_data.price_qty_2}}</button>&nbsp;
+                  <button class="btn btn-outline-primary p-1 py-0" onclick="document.getElementById('price').innerHTML = '$ {{product_data.price_3}}'">{{product_data.price_qty_3}}</button>&nbsp;
                 </div>
       
                 <p>{{product_data.info}}</p>

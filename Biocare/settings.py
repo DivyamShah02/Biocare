@@ -20,7 +20,6 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-7=2$91f-%)wc%j!0=)nsa#9!3cu(&vredckwsv9)bglh%%rj1@'
 
 with open('Biocare/key.txt') as f:
     SECRET_KEY = f.read().strip()
@@ -28,7 +27,8 @@ with open('Biocare/key.txt') as f:
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['https://www.biocareworld.com/']
+# ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['www.biocareworld.com']
 
 
 # Application definition

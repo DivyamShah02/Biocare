@@ -65,3 +65,8 @@ Line does not moves just the bg image slides
 
 distributor form
 email,PASSWORD,mobile,fn,ln,company name,address(country,state),delivery details(first name, last name,company name,email,address,phone)
+
+
+
+
+city,state with two letter, pincode (validations)

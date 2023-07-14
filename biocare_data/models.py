@@ -5,28 +5,48 @@ class Product(models.Model):
     title = models.CharField(max_length=255)
     slug = models.SlugField(max_length=255,unique=True)
     category = models.CharField(max_length=100)
-    price = models.DecimalField(max_digits=8,decimal_places=0)
+    # Price
+    price_qty_1 = models.CharField(max_length=255)
+    price_1 = models.CharField(max_length=30)
+    
+    price_qty_2 = models.CharField(max_length=255)
+    price_2 = models.CharField(max_length=30)
+    
+    price_qty_3 = models.CharField(max_length=255)
+    price_3 = models.CharField(max_length=30)
+    
     info = models.TextField()
     shop_link = models.URLField(max_length=100)
     image = models.ImageField(upload_to='product_img')
+    
+    # Head and Value
     pt1_head = models.CharField(max_length=50,default='Null')
     pt1_value = models.CharField(max_length=50,default='Null')
+    
     pt2_head = models.CharField(max_length=50,default='Null')
     pt2_value = models.CharField(max_length=50,default='Null')
+    
     pt3_head = models.CharField(max_length=50,default='Null')
     pt3_value = models.CharField(max_length=50,default='Null')
+    
     pt4_head = models.CharField(max_length=50,default='Null')
     pt4_value = models.CharField(max_length=50,default='Null')
+    
     pt5_head = models.CharField(max_length=50,default='Null')
     pt5_value = models.CharField(max_length=50,default='Null')
+    
     pt6_head = models.CharField(max_length=50,default='Null')
     pt6_value = models.CharField(max_length=50,default='Null')
+    
     pt7_head = models.CharField(max_length=50,default='Null')
     pt7_value = models.CharField(max_length=50,default='Null')
+    
     pt8_head = models.CharField(max_length=50,default='Null')
     pt8_value = models.CharField(max_length=50,default='Null')
+    
     pt9_head = models.CharField(max_length=50,default='Null')
     pt9_value = models.CharField(max_length=50,default='Null')
+    
     pt10_head = models.CharField(max_length=50,default='Null')
     pt10_value = models.CharField(max_length=50,default='Null')
     
@@ -62,8 +82,9 @@ class Distributor(models.Model):
     last_name = models.CharField(max_length=255)
     user_mail = models.CharField(max_length=255)
     user_number = models.CharField(max_length=15)
-    password = models.CharField(max_length=255)
     user_address = models.TextField()
+    user_pin_code = models.CharField(max_length=8)
+    user_city = models.CharField(max_length=255)
     user_state = models.CharField(max_length=255)
     user_country = models.CharField(max_length=255)
     
@@ -71,6 +92,8 @@ class Distributor(models.Model):
     delivery_mail = models.CharField(max_length=255)
     company_name = models.CharField(max_length=255)
     delivery_address = models.TextField()
+    delivery_pin_code = models.CharField(max_length=8)
+    delivery_city = models.CharField(max_length=255)
     delivery_state = models.CharField(max_length=255)
     delivery_country = models.CharField(max_length=255)
     

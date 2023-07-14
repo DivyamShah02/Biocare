@@ -4,7 +4,7 @@ from biocare_data.models import Product,Blog,Distributor
 # Register your models here.
 
 class AdminProduct(admin.ModelAdmin):
-    list_display = ('title','slug','price','category','shop_link')
+    list_display = ('title','slug','category','shop_link')
 admin.site.register(Product,AdminProduct)
 
 class AdminBlog(admin.ModelAdmin):

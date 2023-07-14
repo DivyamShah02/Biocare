@@ -30,8 +30,12 @@
   <!-- Template Stylesheet -->
   <link href="/static/css/style.css" rel="stylesheet">
   <style>	
-    input,textarea{
+        input,textarea,select{
             border: var(--primary) 1px solid !important;
+        }
+        select{
+          padding: 7px 8px;
+          width: 100%;
         }
     </style>
 </head>
@@ -83,157 +87,351 @@
             {% endif %}
 
 
-            {% if is_logged_in == True %}
-            {% else %}
+            {% if is_logged_in == False %}
             <div class="alert alert-warning" role="alert" style="border-radius: 10px;">
               <b>You are not logged in!<br>
                 First <a href="{% url 'sign_in' %}"><u>Log In</u></a> / <a href="{% url 'register' %}"><u>Register</u></a> to create a distributor profile.</b>
             </div>
+            {% else %}     
+              {% if is_distributor == True %}
+                {% if distributor_accepted == True %}
+                <div class="alert alert-success" role="alert" style="border-radius: 10px;">
+                  <b>You are already a distributor!</b>
+                </div>
+                {% else %}  
+                <div class="alert alert-success" role="alert" style="border-radius: 10px;">
+                  <b>Your account is already created!<br>
+                    Wait while we activate your distributor profile. We will mail you once our team activate your profile.</b>
+                </div>
+                {% endif %}
+              {% else %}                 
+              <div class="text-center mb-3">
+                  <h2>Distributor Form</h2>
+              </div>
+              <div class="card" style="border: var(--primary) 2px solid; border-radius: 10px;">
+                <div class="card-body pt-5 px-md-5">
+                  <form method="post">
+                      {% csrf_token %}
+                    <!-- 2 column grid layout with text inputs for the first and last names -->
+                    <div class="row">
+                      <div class="col-md-6 mb-4">
+                        <div class="form-outline">
+                            <label class="form-label" for="first_name">First name</label>
+                          <input type="text" id="first_name" name="first_name" value="{{user.first_name}}" class="form-control" required autofocus/>
+                        </div>
+                      </div>
+                      <div class="col-md-6 mb-4">
+                        <div class="form-outline">
+                            <label class="form-label" for="last_name">Last name</label>
+                          <input type="text" id="last_name" name="last_name" value="{{user.last_name}}" class="form-control" required/>
+                        </div>
+                      </div>
+                    </div>
+
+                    <!-- Email input -->
+                    <div class="form-outline mb-4">
+                      <label class="form-label" for="email">Your Email Id</label>
+                      <input type="email" id="email" name="email" value="{{user.email}}" class="form-control" required/>
+                    </div>
+
+                    <!-- number input -->
+                    <div class="form-outline mb-4">
+                      <label class="form-label" for="number">Your Mobile Number</label>
+                      <input type="number" min="1" id="number" name="number" class="form-control" required/>
+                    </div>
+
+                    <!-- Password input -->
+                    <!-- <div class="form-outline mb-4">
+                      <label class="form-label" for="password">Password</label>
+                    <input type="password" id="password" name="password" class="form-control" required/>
+                    </div> -->
+
+                    <!-- company input -->
+                    <!-- <div class="form-outline mb-4">
+                      <label class="form-label" for="company">Company Name</label>
+                    <input type="text" id="company" name="company" class="form-control" required/>
+                    </div> -->
+
+                    <!-- address input -->
+                    <div class="form-outline mb-4">
+                      <label class="form-label" for="address">Your Address</label>
+                    <textarea id="address" name="address" class="form-control" required rows="4"></textarea>
+                    </div>
+
+                    <div class="row">
+                      <div class="col-md-6 mb-4">
+                        <!-- state input -->
+                        <div class="form-outline">
+                          <label class="form-label" for="city">City</label><br>
+                        <input type="" id="city" name="city" class="form-control" required/>                      
+                        </div>
+                      </div>
+                      <div class="col-md-6 mb-4">
+                        <!-- country input -->
+                        <div class="form-outline">
+                          <label class="form-label" for="pin_code">Pin Code</label>
+                        <input type="text" minlength="5" maxlength="7" pattern="[A-Za-z0-9\s]{5,7}" id="pin_code" name="pin_code" class="form-control" required/>
+                        </div>
+                      </div>
+
+                    </div>        
+                    
+                    
+                    <div class="row">
+                      <div class="col-md-6 mb-4">
+                        <!-- state input -->
+                        <div class="form-outline">
+                          <label class="form-label" for="state">State</label><br>
+                        <!-- <input type="" id="state" name="state" class="form-control" required/> -->
+                        <select id="state" name="state">
+                        <!-- <option value="yo"></option> -->
+                        <option value="AL - Alabama" disabled>--- USA ---</option>
+                        <option value="AK - Alaska">AK - Alaska</option>
+                        <option value="AZ - Arizona">AZ - Arizona</option>
+                        <option value="AR - Arkansas">AR - Arkansas</option>
+                        <option value="CA - California">CA - California</option>
+                        <option value="CO - Colorado">CO - Colorado</option>
+                        <option value="CT - Connecticut">CT - Connecticut</option>
+                        <option value="DE - Delaware">DE - Delaware</option>
+                        <option value="FL - Florida">FL - Florida</option>
+                        <option value="GA - Georgia">GA - Georgia</option>
+                        <option value="HI - Hawaii">HI - Hawaii</option>
+                        <option value="ID - Idaho">ID - Idaho</option>
+                        <option value="IL - Illinois">IL - Illinois</option>
+                        <option value="IN - Indiana">IN - Indiana</option>
+                        <option value="IA - Iowa">IA - Iowa</option>
+                        <option value="KS - Kansas">KS - Kansas</option>
+                        <option value="KY - Kentucky">KY - Kentucky</option>
+                        <option value="LA - Louisiana">LA - Louisiana</option>
+                        <option value="ME - Maine">ME - Maine</option>
+                        <option value="MD - Maryland">MD - Maryland</option>
+                        <option value="MA - Massachusetts">MA - Massachusetts</option>
+                        <option value="MI - Michigan">MI - Michigan</option>
+                        <option value="MN - Minnesota">MN - Minnesota</option>
+                        <option value="MS - Mississippi">MS - Mississippi</option>
+                        <option value="MO - Missouri">MO - Missouri</option>
+                        <option value="MT - Montana">MT - Montana</option>
+                        <option value="NE - Nebraska">NE - Nebraska</option>
+                        <option value="NV - Nevada">NV - Nevada</option>
+                        <option value="NH - New Hampshire">NH - New Hampshire</option>
+                        <option value="NJ - New Jersey">NJ - New Jersey</option>
+                        <option value="NM - New Mexico">NM - New Mexico</option>
+                        <option value="NY - New York">NY - New York</option>
+                        <option value="NC - North Carolina">NC - North Carolina</option>
+                        <option value="ND - North Dakota">ND - North Dakota</option>
+                        <option value="OH - Ohio">OH - Ohio</option>
+                        <option value="OK - Oklahoma">OK - Oklahoma</option>
+                        <option value="OR - Oregon">OR - Oregon</option>
+                        <option value="PA - Pennsylvania">PA - Pennsylvania</option>
+                        <option value="RI - Rhode Island">RI - Rhode Island</option>
+                        <option value="SC - South Carolina">SC - South Carolina</option>
+                        <option value="SD - South Dakota">SD - South Dakota</option>
+                        <option value="TN - Tennessee">TN - Tennessee</option>
+                        <option value="TX - Texas">TX - Texas</option>
+                        <option value="UT - Utah">UT - Utah</option>
+                        <option value="VT - Vermont">VT - Vermont</option>
+                        <option value="VA - Virginia">VA - Virginia</option>
+                        <option value="WA - Washington">WA - Washington</option>
+                        <option value="WV - West Virginia">WV - West Virginia</option>
+                        <option value="WI - Wisconsin">WI - Wisconsin</option>
+                        <option value="WY - Wyoming">WY - Wyoming</option>
+                        <option value="AL - Alabama" disabled>--- Canada ---</option>
+                        <option value="AB - Alberta">AB - Alberta</option>
+                        <option value="BC - British Columbia">BC - British Columbia</option>
+                        <option value="MB - Manitoba">MB - Manitoba</option>
+                        <option value="NB - New Brunswick">NB - New Brunswick</option>
+                        <option value="NL - Newfoundland and Labrador">NL - Newfoundland and Labrador</option>
+                        <option value="NT - Northwest Territories">NT - Northwest Territories</option>
+                        <option value="NS - Nova Scotia">NS - Nova Scotia</option>
+                        <option value="NU - Nunavut">NU - Nunavut</option>
+                        <option value="ON - Ontario">ON - Ontario</option>
+                        <option value="PE - Prince Edward Island">PE - Prince Edward Island</option>
+                        <option value="QC - Quebec">QC - Quebec</option>
+                        <option value="SK - Saskatchewan">SK - Saskatchewan</option>
+                        <option value="YT - Yukon">YT - Yukon</option>
+                        </select>
+                        </div>
+                      </div>
+                      <div class="col-md-6 mb-4">
+                        <!-- country input -->
+                        <div class="form-outline">
+                          <label class="form-label" for="country">Country</label>
+                        <!-- <input type="text" id="country" name="country" class="form-control" required/> -->
+                        <select id="country" name="country">
+                          <option value="USA">USA</option>
+                          <option value="USA">Canada</option>
+                        </select>
+                        </div>
+                      </div>
+
+                    </div>     
+                    
+                    <b></b><hr style="color: var(--primary); padding-top: 2px;"></b>
+                    
+                    <h2>Delivery Information</h2>
+                    <!-- <div class="row">
+                      <div class="col-md-6 mb-4">
+                        <div class="form-outline">
+                            <label class="form-label" for="first_name">First name</label>
+                          <input type="text" id="first_name" name="first_name" class="form-control" required autofocus/>
+                        </div>
+                      </div>
+                      <div class="col-md-6 mb-4">
+                        <div class="form-outline">
+                            <label class="form-label" for="last_name">Last name</label>
+                          <input type="text" id="last_name" name="last_name" class="form-control" required/>
+                        </div>
+                      </div>
+                    </div> -->
+
+                    <!-- Email input -->
+                    <div class="form-outline mb-4">
+                      <label class="form-label" for="co_email">Company Email Id</label>
+                      <input type="email" id="co_email" name="co_email" class="form-control" required/>
+                    </div>
+
+
+                    <!-- company input -->
+                    <div class="form-outline mb-4">
+                      <label class="form-label" for="company">Company Name</label>
+                    <input type="text" id="company" name="company" class="form-control" required/>
+                    </div>
+
+                    <!-- address input -->
+                    <div class="form-outline mb-4">
+                      <label class="form-label" for="co_address">Delivery Address</label>
+                    <textarea id="co_address" name="co_address" class="form-control" required rows="4"></textarea>
+                    </div>
+
+                    <div class="row">
+                      <div class="col-md-6 mb-4">
+                        <!-- state input -->
+                        <div class="form-outline">
+                          <label class="form-label" for="co_city">City</label><br>
+                        <input type="" id="co_city" name="co_city" class="form-control" required/>                      
+                        </div>
+                      </div>
+                      <div class="col-md-6 mb-4">
+                        <!-- country input -->
+                        <div class="form-outline">
+                          <label class="form-label" for="co_pin_code">Pin Code</label>
+                        <input type="text" minlength="5" maxlength="7" pattern="[A-Za-z0-9\s]{5,7}" id="co_pin_code" name="co_pin_code" class="form-control" required/>
+                        </div>
+                      </div>
+
+                    </div>        
+                    
+                    
+                    <div class="row">
+                      <div class="col-md-6 mb-4">
+                        <!-- state input -->
+                        <div class="form-outline">
+                          <label class="form-label" for="co_state">State</label><br>
+                        <!-- <input type="" id="state" name="state" class="form-control" required/> -->
+                        <select id="co_state" name="co_state">
+                        <!-- <option value="yo"></option> -->
+                        <option value="AL - Alabama" disabled>--- USA ---</option>
+                        <option value="AK - Alaska">AK - Alaska</option>
+                        <option value="AZ - Arizona">AZ - Arizona</option>
+                        <option value="AR - Arkansas">AR - Arkansas</option>
+                        <option value="CA - California">CA - California</option>
+                        <option value="CO - Colorado">CO - Colorado</option>
+                        <option value="CT - Connecticut">CT - Connecticut</option>
+                        <option value="DE - Delaware">DE - Delaware</option>
+                        <option value="FL - Florida">FL - Florida</option>
+                        <option value="GA - Georgia">GA - Georgia</option>
+                        <option value="HI - Hawaii">HI - Hawaii</option>
+                        <option value="ID - Idaho">ID - Idaho</option>
+                        <option value="IL - Illinois">IL - Illinois</option>
+                        <option value="IN - Indiana">IN - Indiana</option>
+                        <option value="IA - Iowa">IA - Iowa</option>
+                        <option value="KS - Kansas">KS - Kansas</option>
+                        <option value="KY - Kentucky">KY - Kentucky</option>
+                        <option value="LA - Louisiana">LA - Louisiana</option>
+                        <option value="ME - Maine">ME - Maine</option>
+                        <option value="MD - Maryland">MD - Maryland</option>
+                        <option value="MA - Massachusetts">MA - Massachusetts</option>
+                        <option value="MI - Michigan">MI - Michigan</option>
+                        <option value="MN - Minnesota">MN - Minnesota</option>
+                        <option value="MS - Mississippi">MS - Mississippi</option>
+                        <option value="MO - Missouri">MO - Missouri</option>
+                        <option value="MT - Montana">MT - Montana</option>
+                        <option value="NE - Nebraska">NE - Nebraska</option>
+                        <option value="NV - Nevada">NV - Nevada</option>
+                        <option value="NH - New Hampshire">NH - New Hampshire</option>
+                        <option value="NJ - New Jersey">NJ - New Jersey</option>
+                        <option value="NM - New Mexico">NM - New Mexico</option>
+                        <option value="NY - New York">NY - New York</option>
+                        <option value="NC - North Carolina">NC - North Carolina</option>
+                        <option value="ND - North Dakota">ND - North Dakota</option>
+                        <option value="OH - Ohio">OH - Ohio</option>
+                        <option value="OK - Oklahoma">OK - Oklahoma</option>
+                        <option value="OR - Oregon">OR - Oregon</option>
+                        <option value="PA - Pennsylvania">PA - Pennsylvania</option>
+                        <option value="RI - Rhode Island">RI - Rhode Island</option>
+                        <option value="SC - South Carolina">SC - South Carolina</option>
+                        <option value="SD - South Dakota">SD - South Dakota</option>
+                        <option value="TN - Tennessee">TN - Tennessee</option>
+                        <option value="TX - Texas">TX - Texas</option>
+                        <option value="UT - Utah">UT - Utah</option>
+                        <option value="VT - Vermont">VT - Vermont</option>
+                        <option value="VA - Virginia">VA - Virginia</option>
+                        <option value="WA - Washington">WA - Washington</option>
+                        <option value="WV - West Virginia">WV - West Virginia</option>
+                        <option value="WI - Wisconsin">WI - Wisconsin</option>
+                        <option value="WY - Wyoming">WY - Wyoming</option>
+                        <option value="AL - Alabama" disabled>--- Canada ---</option>
+                        <option value="AB - Alberta">AB - Alberta</option>
+                        <option value="BC - British Columbia">BC - British Columbia</option>
+                        <option value="MB - Manitoba">MB - Manitoba</option>
+                        <option value="NB - New Brunswick">NB - New Brunswick</option>
+                        <option value="NL - Newfoundland and Labrador">NL - Newfoundland and Labrador</option>
+                        <option value="NT - Northwest Territories">NT - Northwest Territories</option>
+                        <option value="NS - Nova Scotia">NS - Nova Scotia</option>
+                        <option value="NU - Nunavut">NU - Nunavut</option>
+                        <option value="ON - Ontario">ON - Ontario</option>
+                        <option value="PE - Prince Edward Island">PE - Prince Edward Island</option>
+                        <option value="QC - Quebec">QC - Quebec</option>
+                        <option value="SK - Saskatchewan">SK - Saskatchewan</option>
+                        <option value="YT - Yukon">YT - Yukon</option>
+                        </select>
+                        </div>
+                      </div>
+                      <div class="col-md-6 mb-4">
+                        <!-- country input -->
+                        <div class="form-outline">
+                          <label class="form-label" for="co_country">Country</label>
+                        <!-- <input type="text" id="country" name="country" class="form-control" required/> -->
+                        <select id="co_country" name="co_country">
+                          <option value="USA">USA</option>
+                          <option value="Canada">Canada</option>
+                        </select>
+                        </div>
+                      </div>
+
+                    </div> 
+
+    
+                    <!-- Checkbox -->
+                    <div class="form-check mb-4">
+                      <input class="form-check-input me-2" type="checkbox" value="" id="privacy" required/>
+                      <label class="form-check-label" for="privacy">I agree with Biocare World <a href="#"><u>Privacy Policy</u></a> and <a href="#"><u>Terms & Conditions</u></a>
+                      </label>
+                    </div>
+    
+                    <!-- Submit button -->
+                    <button type="submit" class="btn btn-primary btn-block mb-4 px-5" style="border-radius: 20px;">
+                      Sign up
+                    </button>                
+                  </form>
+                </div>
+                <!-- <div class="card-footer text-center">
+                  <p>Already have an account? <a href="{% url 'sign_in' %}"><u>Sign In</u></a></p>
+                </div> -->
+              </div>
             {% endif %}
-            
-            <div class="text-center mb-3">
-                <h2>Become Distributor at Biocare World</h2>
-            </div>
-            <div class="card" style="border: var(--primary) 2px solid; border-radius: 10px;">
-              <div class="card-body pt-5 px-md-5">
-                <form method="post">
-                    {% csrf_token %}
-                  <!-- 2 column grid layout with text inputs for the first and last names -->
-                  <div class="row">
-                    <div class="col-md-6 mb-4">
-                      <div class="form-outline">
-                          <label class="form-label" for="first_name">First name</label>
-                        <input type="text" id="first_name" name="first_name" value="{{user.first_name}}" class="form-control" required autofocus/>
-                      </div>
-                    </div>
-                    <div class="col-md-6 mb-4">
-                      <div class="form-outline">
-                          <label class="form-label" for="last_name">Last name</label>
-                        <input type="text" id="last_name" name="last_name" value="{{user.last_name}}" class="form-control" required/>
-                      </div>
-                    </div>
-                  </div>
+            {% endif %}
 
-                  <!-- Email input -->
-                  <div class="form-outline mb-4">
-                    <label class="form-label" for="email">Your Email Id</label>
-                    <input type="email" id="email" name="email" value="{{user.email}}" class="form-control" required/>
-                  </div>
-
-                  <!-- number input -->
-                  <div class="form-outline mb-4">
-                    <label class="form-label" for="number">Your Mobile Number</label>
-                    <input type="number" min="1" id="number" name="number" class="form-control" required/>
-                  </div>
-
-                  <!-- Password input -->
-                  <!-- <div class="form-outline mb-4">
-                    <label class="form-label" for="password">Password</label>
-                  <input type="password" id="password" name="password" class="form-control" required/>
-                  </div> -->
-
-                  <!-- company input -->
-                  <!-- <div class="form-outline mb-4">
-                    <label class="form-label" for="company">Company Name</label>
-                  <input type="text" id="company" name="company" class="form-control" required/>
-                  </div> -->
-
-                  <!-- address input -->
-                  <div class="form-outline mb-4">
-                    <label class="form-label" for="address">Your Address</label>
-                  <textarea id="address" name="address" class="form-control" required rows="4"></textarea>
-                  </div>
-
-                  <div class="row">
-                    <div class="col-md-6 mb-4">
-                      <!-- state input -->
-                      <div class="form-outline">
-                        <label class="form-label" for="state">State</label>
-                      <input type="text" id="state" name="state" class="form-control" required/>
-                      </div>
-                    </div>
-                    <div class="col-md-6 mb-4">
-                      <!-- country input -->
-                      <div class="form-outline">
-                        <label class="form-label" for="country">Country</label>
-                      <input type="text" id="country" name="country" class="form-control" required/>
-                      </div>
-                    </div>
-
-                  </div>                  
-                  
-                  <h2>Delivery Information</h2>
-                  <!-- <div class="row">
-                    <div class="col-md-6 mb-4">
-                      <div class="form-outline">
-                          <label class="form-label" for="first_name">First name</label>
-                        <input type="text" id="first_name" name="first_name" class="form-control" required autofocus/>
-                      </div>
-                    </div>
-                    <div class="col-md-6 mb-4">
-                      <div class="form-outline">
-                          <label class="form-label" for="last_name">Last name</label>
-                        <input type="text" id="last_name" name="last_name" class="form-control" required/>
-                      </div>
-                    </div>
-                  </div> -->
-
-                  <!-- Email input -->
-                  <div class="form-outline mb-4">
-                    <label class="form-label" for="co_email">Company Email Id</label>
-                    <input type="email" id="co_email" name="co_email" class="form-control" required/>
-                  </div>
-
-
-                  <!-- company input -->
-                  <div class="form-outline mb-4">
-                    <label class="form-label" for="company">Company Name</label>
-                  <input type="text" id="company" name="company" class="form-control" required/>
-                  </div>
-
-                  <!-- address input -->
-                  <div class="form-outline mb-4">
-                    <label class="form-label" for="co_address">Delivery Address</label>
-                  <textarea id="co_address" name="co_address" class="form-control" required rows="4"></textarea>
-                  </div>
-
-                  <div class="row">
-                    <div class="col-md-6 mb-4">
-                      <!-- state input -->
-                      <div class="form-outline">
-                        <label class="form-label" for="co_state">State</label>
-                      <input type="text" id="co_state" name="co_state" class="form-control" required/>
-                      </div>
-                    </div>
-                    <div class="col-md-6 mb-4">
-                      <!-- country input -->
-                      <div class="form-outline">
-                        <label class="form-label" for="co_country">Country</label>
-                      <input type="text" id="co_country" name="co_country" class="form-control" required/>
-                      </div>
-                    </div>
-
-                  </div>     
-  
-
-  
-                  <!-- Checkbox -->
-                  <div class="form-check mb-4">
-                    <input class="form-check-input me-2" type="checkbox" value="" id="privacy" required/>
-                    <label class="form-check-label" for="privacy">I agree with Biocare World <a href="#"><u>Privacy Policy</u></a> and <a href="#"><u>Terms & Conditions</u></a>
-                    </label>
-                  </div>
-  
-                  <!-- Submit button -->
-                  <button type="submit" class="btn btn-primary btn-block mb-4 px-5" style="border-radius: 20px;">
-                    Sign up
-                  </button>                
-                </form>
-              </div>
-              <div class="card-footer text-center">
-                <p>Already have an account? <a href="{% url 'sign_in' %}"><u>Sign In</u></a></p>
-              </div>
-            </div>
           </div>
         </div>
       </div>

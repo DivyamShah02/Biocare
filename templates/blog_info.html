@@ -6,6 +6,7 @@
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="{% for tag in blog_tags %}{% if forloop.counter == 1 %}{% else %}, {% endif %}{{tag}}{% endfor %}" name="keywords">
     <meta content="{{blog_data.para_1}}" name="description">
+    <meta content="{{blog_data.title}}" name="title">
     <!-- Favicon -->
     <link href="/static/img/favicon.png" rel="icon">
 
@@ -69,7 +70,7 @@
   
   
             <div class="pt-5">
-              <p>Category: Food | Tags: {% for tag in blog_tags %}{% if forloop.counter == 1 %}{% else %},{% endif %} #{{tag}}{% endfor %}
+              <p>Category: {{blog_data.category}} | Tags: {% for tag in blog_tags %}{% if forloop.counter == 1 %}{% else %},{% endif %} #{{tag}}{% endfor %}
             </div>
   
   

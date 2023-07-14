@@ -145,10 +145,9 @@ def log_out(request):
 
 def distributor_form(request):
     error = 0
-    if request.method == 'POST':
-        
+    user = request.user
+    if request.method == 'POST':    
         if request.user.is_authenticated:
-            user = request.user
             if user.is_active:
                 user_mail = request.POST.get('email')
                 user_already = Distributor.objects.filter(user_mail=user_mail)
@@ -160,12 +159,15 @@ def distributor_form(request):
                         last_name = request.POST.get('last_name'),
                         user_mail = user_mail,
                         user_number = request.POST.get('number'),
-                        password = request.POST.get('password'),
                         user_address = request.POST.get('address'),
+                        user_pin_code = request.POST.get('pin_code'),
+                        user_city = request.POST.get('city'),
                         user_state = request.POST.get('state'),
                         user_country = request.POST.get('country'),
                         delivery_mail = request.POST.get('co_email'),
                         company_name = request.POST.get('company'),
+                        delivery_pin_code = request.POST.get('co_pin_code'),
+                        delivery_city = request.POST.get('co_city'),
                         delivery_address = request.POST.get('co_address'),
                         delivery_state = request.POST.get('co_state'),
                         delivery_country = request.POST.get('co_country'),
@@ -183,10 +185,24 @@ def distributor_form(request):
                 error = 2 # Not activated
         else:
             error = 1 # Not logged in
+    
+    is_distributor = False
+    distributor_accepted = False
+    try:
+        user_obj = Distributor.objects.filter(user_mail=user.email)
+        is_distributor = True
+        if len(user_obj)>0:
+            distributor_accepted = user_obj[0].accepted
+    except:
+        is_distributor = False
+        distributor_accepted = False
+        pass
     data = {
         'is_logged_in':request.user.is_authenticated,     
         'error':error,   
         'user':request.user,
+        'is_distributor':is_distributor,
+        'distributor_accepted':distributor_accepted,
     }
     return render(request,'distributor_form.html',data)
 
@@ -254,12 +270,16 @@ def product_add(request):
     if request.method == 'POST':
         try:
             product_obj = Product(title=request.POST.get('title'),
-                                category=request.POST.get('category'),
-                                #   slug=request.POST.get('slug'),
-                                price=int(request.POST.get('price')),
-                                info=request.POST.get('info'),
-                                shop_link=request.POST.get('shop_link'),
-                                image=request.FILES.get('image'))               
+                                  category=request.POST.get('category'),                                
+                                  price_qty_1=request.POST.get('price_qty_1'),
+                                  price_1=request.POST.get('price_1'),
+                                  price_qty_2=request.POST.get('price_qty_2'),
+                                  price_2=request.POST.get('price_2'),
+                                  price_qty_3=request.POST.get('price_qty_3'),
+                                  price_3=request.POST.get('price_3'),
+                                  info=request.POST.get('info'),
+                                  shop_link=request.POST.get('shop_link'),
+                                  image=request.FILES.get('image'))
             for i in range(1,11):
                 if request.POST.get(f'pt{i}_head') != '':                              
                     if i == 1:
@@ -294,6 +314,7 @@ def product_add(request):
                         product_obj.pt10_value = request.POST.get(f'pt{i}_value')
                         
             product_obj.save()
+            return redirect(f'https://www.biocareworld.com/product/{product_obj.slug}')
         except Exception as e:
             return HttpResponse(f'{e}')
               
